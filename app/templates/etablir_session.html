@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Établir une session</h1>
+    <form action="" method="post" novalidate>
+        {{ formulaire.hidden_tag() }}
+        <p>
+            {{ formulaire.nom.label }}<br>
+            {{ formulaire.nom(size=32) }}
+        </p>
+        <p>
+            {{ formulaire.mot_de_passe.label }}<br>
+            {{ formulaire.mot_de_passe(size=32) }}
+        </p>
+        <p>{{ formulaire.se_souvenir_de_moi() }} {{ formulaire.se_souvenir_de_moi.label }}</p>
+        <p>{{ formulaire.soumettre() }}</p>
+    </form>
+{% endblock %}

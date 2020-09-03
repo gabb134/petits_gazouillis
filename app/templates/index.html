@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h1><h1>Bonjour, {{ utilisateur.nom }} - (template) </h1></h1>
+        {% for p in publications %}
+        <div><p>{{ p.auteur.nom }} dit: <b>{{ p.corps }}</b></p></div>
+        {% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+<html>
+    <head>
+        {% if titre %}
+        <title>{{ titre }} - Petis gazouillis</title>
+        {% else %}
+        <title>Bienvenue sur petis gazouillis!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Petis Gazouillis: 
+            <a href="/index">Acceuil</a>
+            <a href="/etablir_session">Établir une session</a>
+        </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
