@@ -8,10 +8,19 @@
     </head>
     <body>
         <div>Petis Gazouillis: 
-            <a href="/index">Acceuil</a>
-            <a href="/etablir_session">Établir une session</a>
+            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for ('etablir_session') }}">Établir une session</a>
         </div>
-        <hr>
+        <hr>   
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
