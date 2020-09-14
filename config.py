@@ -6,3 +6,6 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'petits_gazouillis.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    BD_TABLES_EFFACER = os.environ.get('BD_TABLES_EFFACER') or ['publication','utilisateur']
+    BD_TABLES_CREER = os.environ.get('BD_TABLES_CREER') or ['utilisateur','publication']

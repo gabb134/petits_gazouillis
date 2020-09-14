@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <h1><h1>Bonjour, {{ utilisateur.nom }} - (template) </h1></h1>
-        {% for p in publications %}
-        <div><p>{{ p.auteur.nom }} dit: <b>{{ p.corps }}</b></p></div>
+        <h1>Les utilisateurs par Gabriel Marrero </h1>
+        {% for u in utilisateur %}
+        <p><img src="{{u.avatar}}">{{ u.nom }}</p>
         {% endfor %}
 {% endblock %}

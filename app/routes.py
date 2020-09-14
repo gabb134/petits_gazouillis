@@ -1,22 +1,15 @@
 from flask import render_template, flash,redirect,url_for
 from app import app
 from app.formulaires import FormulaireEtablirSession
+from app.models import Utilisateur
 
 @app.route('/')
 @app.route('/index')
 def index():
-    abc = {"nom":"Monsieur Patate"}
-    publications = [
-        {
-            'auteur': {'nom': 'John'},
-            'corps': 'J\'aime les patates!!!'
-        },
-        {
-            'auteur': {'nom': 'Jean'},
-            'corps': 'Moi itou!!!'
-        }
-    ]
-    return render_template('index.html', titrex='Accueil', utilisateur=abc,publications=publications) 
+
+    utilisateur = Utilisateur.query.all()
+
+    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur) 
 
 
 @app.route('/etablir_session',methods=['GET','POST'])
