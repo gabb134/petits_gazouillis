@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Établir une session</h1>
+    <p>Nouvel utilisateur? <a href="{{url_for('enregistrer')}}"> Cliquez ici pour s'enregistrer!</a></p>
     <form action="" method="post" novalidate>
         {{ formulaire.hidden_tag() }}
         <p>
