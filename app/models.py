@@ -2,8 +2,14 @@ from datetime import datetime
 from app import db
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+from app import etablir_session
 
-class Utilisateur(db.Model):
+@etablir_session.user_loader
+def load_utilisateur(id):
+    return Utilisateur.query.get(int(id))
+
+class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(64), index=True, unique=True)
     courriel = db.Column(db.String(120), index=True, unique=True)
@@ -11,7 +17,7 @@ class Utilisateur(db.Model):
     avatar = db.Column(db.Text(131072), index =False, unique=False)
     a_propos_de_moi = db.Column(db.String(140))
 
-    Publication = db.relationship('Publication', backref='auteur', lazy='dynamic')
+    publication = db.relationship('Publication', backref='auteur', lazy='dynamic')
     
 
     def __repr__(self):

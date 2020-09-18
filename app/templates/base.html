@@ -9,9 +9,14 @@
         {% endif %}
     </head>
     <body>
-        <div>Petis Gazouillis: 
+        <div>Petis Gazouillis par Gabriel Marrero: 
             <a href="{{ url_for('index') }}">Acceuil</a>
-            <a href="{{ url_for ('etablir_session') }}">Établir une session</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('etablir_session') }}">Établir une session</a>
+            {% else %}
+              <a href="{{ url_for('logout') }}">Fin de la session</a>
+            {% endif %}
+            
         </div>
         <hr>   
         {% with messages = get_flashed_messages() %}
