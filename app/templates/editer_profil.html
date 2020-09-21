@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Editer Profil</h1>
+    <form action="" method="post">
+        {{ formulaire.hidden_tag() }}
+        <p>
+            {{ formulaire.nom.label }}<br>
+            {{ formulaire.nom(size=32) }}<br>
+            {% for error in formulaire.nom.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulaire.a_propos_de_moi.label }}<br>
+            {{ formulaire.a_propos_de_moi(cols=50, rows=4) }}<br>
+            {% for error in formulaire.a_propos_de_moi.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ formulaire.soumettre() }}</p>
+    </form>
+{% endblock %}

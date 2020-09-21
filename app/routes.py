@@ -13,6 +13,7 @@ import random
 import base64 
 from io import BytesIO
 from datetime import datetime
+from app.formulaires import FormulaireEditerProfil
 
 @app.before_request
 def before_request():
@@ -100,3 +101,18 @@ def etablir_session():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/editer_profil', methods=['GET','POST'])
+@login_required
+def editer_profil():
+    formulaire = FormulaireEditerProfil()
+    if formulaire.validate_on_submit():
+        current_user.nom = formulaire.nom.data
+        current_user.a_propos_de_moi = formulaire.a_propos_de_moi.data
+        db.session.commit()
+        flash('Vos modifications ont été sauvegardées.')
+        return redirect(url_for('editer_profil'))
+    elif request.method == 'GET':
+        formulaire.nom.data = current_user.nom
+        formulaire.a_propos_de_moi.data = current_user.a_propos_de_moi
+    return render_template('editer_profil.html', titre= 'Editer Profil', formulaire=formulaire)
