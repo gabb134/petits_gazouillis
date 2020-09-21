@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr varlign="top">
+        <td><img src="{{utilisateur.avatar}}"></td>
+        <td>
+            <h1>Utilisateur: {{ utilisateur.nom }}</h1></td>
+            {% if utilisateur.a_propos_de_moi %}<p>{{ utilisateur.a_propos_de_moi}}</p> {%endif%}
+            {% if utilisateur.dernier_acces %}<p>Dernier acces: {{ utilisateur.dernier_acces}}</p> {% endif %}
+    </tr>
+</table>
+<hr>
+<table>
+    {% for p in publication %}
+        {% include '_publication.html'%}
+    {% endfor %}
+</table>
+{% endblock %}

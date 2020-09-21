@@ -12,6 +12,15 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import base64 
 from io import BytesIO
+from datetime import datetime
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.dernier_acces = datetime.utcnow()
+        db.session.commit()
+
+ 
 
 @app.route('/')
 @app.route('/index')
@@ -22,6 +31,16 @@ def index():
     #utilisateur = Utilisateur.query.all()
     return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication) 
 
+
+@app.route('/utilisateur/<nom>')
+@login_required
+def utilisateur(nom):
+    utilisateur= Utilisateur.query.filter_by(nom=nom).first_or_404()
+    publication = utilisateur.publication.all()
+    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication)
+
+
+
 @app.route('/enregistrer',methods=['GET','POST'])
 def enregistrer():
     if current_user.is_authenticated:
@@ -30,25 +49,25 @@ def enregistrer():
     if formulaire.validate_on_submit():
         utilisateur = Utilisateur(nom=formulaire.nom.data, courriel = formulaire.courriel.data)
         utilisateur.enregistrer_mot_de_passe(formulaire.mot_de_passe.data)
-       fnt = ImageFont.truetype('/Library/Fonts/Arial.ttf',15)
-        image = Image.new('RGB',(128,128), color = 'black')
-        for i in range(20):
-            x = random.randint(0,128)
-            y = random.randint(0,128)
-            r = random.randint(0,255)
-            g = random.randint(0,255)
-            b = random.randint(0,255)
-            h = random.randint(10,20)
-            fnt = ImageFont.truetype('/Library/Fonts/Arial.ttf',h)
-            d = ImageDraw.Draw(image)
-            d.text((x,y), utilisateur.nom, font = fnt, fill = (r,g,g))
+ #      fnt = ImageFont.truetype('/Library/Fonts/Arial.ttf',15)
+  #      image = Image.new('RGB',(128,128), color = 'black')
+   #     for i in range(20):
+    #        x = random.randint(0,128)
+    #        y = random.randint(0,128)
+     #       r = random.randint(0,255)
+      #      g = random.randint(0,255)
+       #     b = random.randint(0,255)
+        #    h = random.randint(10,20)
+         #   fnt = ImageFont.truetype('/Library/Fonts/Arial.ttf',h)
+          #  d = ImageDraw.Draw(image)
+           # d.text((x,y), utilisateur.nom, font = fnt, fill = (r,g,g))
 
-        tampon = BytesIO()
-        image.save(tampon,format="JPEG")
+        #tampon = BytesIO()
+        #image.save(tampon,format="JPEG")
         # "data:image/jpg;base64,"
-        image_base64 = base64.b64encode(tampon.getvalue()).decode("utf-8")
-        utilisateur.avatar = "data:image/jpg;base64," + image_base64
-        print("data:image/jpg;base64," + image_base64)
+        #image_base64 = base64.b64encode(tampon.getvalue()).decode("utf-8")
+        #utilisateur.avatar = "data:image/jpg;base64," + image_base64
+        #print("data:image/jpg;base64," + image_base64)
 
         db.session.add(utilisateur)
         db.session.commit()

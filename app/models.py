@@ -17,6 +17,8 @@ class Utilisateur(UserMixin, db.Model):
     avatar = db.Column(db.Text(131072), index =False, unique=False)
     a_propos_de_moi = db.Column(db.String(140))
 
+    dernier_acces = db.Column(db.DateTime, default= datetime.utcnow)
+
     publication = db.relationship('Publication', backref='auteur', lazy='dynamic')
     
 
@@ -70,7 +72,7 @@ def get_modele(modele, ligne, racine):
         else:
             avatar = "PAS DÉFINI"
 
-        u = Utilisateur(nom=nom, courriel=courriel,avatar =avatar, a_propos_de_moi= a_propos_de_moi)
+        u = Utilisateur(nom=nom, courriel=courriel,avatar =avatar, a_propos_de_moi= a_propos_de_moi, dernier_acces=datetime.utcnow())
         u.enregistrer_mot_de_passe(mot_de_passe=mot_de_passe)
 
         return u

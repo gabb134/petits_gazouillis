@@ -14,6 +14,7 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('etablir_session') }}">Établir une session</a>
             {% else %}
+              <a href="{{ url_for('utilisateur',nom=current_user.nom) }}">Profil</a>
               <a href="{{ url_for('logout') }}">Fin de la session</a>
             {% endif %}
             
