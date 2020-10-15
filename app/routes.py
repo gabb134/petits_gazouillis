@@ -105,7 +105,7 @@ def logout():
 @app.route('/editer_profil', methods=['GET','POST'])
 @login_required
 def editer_profil():
-    formulaire = FormulaireEditerProfil()
+    formulaire = FormulaireEditerProfil(current_user.nom)
     if formulaire.validate_on_submit():
         current_user.nom = formulaire.nom.data
         current_user.a_propos_de_moi = formulaire.a_propos_de_moi.data

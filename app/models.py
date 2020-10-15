@@ -9,6 +9,11 @@ from app import etablir_session
 def load_utilisateur(id):
     return Utilisateur.query.get(int(id))
 
+partisans = db.Table('partisans',
+    db.Column('partisans_id',db.Integer,db.ForeignKey('utilisateur.id')),
+    db.Column('utilisateur_qui_est_suivi_id',db.Integer,db.ForeignKey('utilisateur.id'))
+)
+
 class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(64), index=True, unique=True)
@@ -20,7 +25,34 @@ class Utilisateur(UserMixin, db.Model):
     dernier_acces = db.Column(db.DateTime, default= datetime.utcnow)
 
     publication = db.relationship('Publication', backref='auteur', lazy='dynamic')
+
+    les_partisans = db.relationship(
+        'Utilisateur',secondary=partisans,
+        primaryjoin=(partisans.c.partisans_id==id),
+        secondaryjoin=(partisans.c.utilisateur_qui_est_suivi_id==id),
+        backref = db.backref('partisans',lazy='dynamic'),lazy='dynamic')
+
+    def devenir_partisan(self,utilisateur):
+        if not self.est_partisan(utilisateur):
+            print("ajouter partisans:{}".format(utilisateur.nom))
+            self.les_partisans.append(utilisateur)
     
+    def ne_plus_etre_partisan(self,utilisateur):
+        if self.est_partisan(utilisateur):
+            print("retirer partisan:{}".format(utilisateur.nom))
+            self.les_partisans.remove(utilisateur)
+
+    def est_partisan(self,utilisateur):
+        return self.les_partisans.filter(
+            partisans.c.utilisateur_qui_est_suivi_id == utilisateur.id).count() > 0     
+
+    def Liste_publications_dont_je_suis_partisans(self):
+        publication_suivies = Publication.query.join(
+            partisans, (partisans.c.utilisateur_qui_est_suivi_id == Publication.utilisateur_id)).filter(
+                partisans.c.partisans_id==self.id)
+        mes_publications = Publication.query.filter_by(utilisateur_id = self.id)
+        return mes_publications.union(publication_suivies).order_by(Publication.horodatage.desc())
+        
 
     def __repr__(self):
         return '<Utilisateur {}>'.format(self.nom)  

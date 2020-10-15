@@ -1,2 +1,2 @@
 FLASK_APP=petits_gazouillis.py
-FLASK_ENV=development
+FLASK_ENV=production

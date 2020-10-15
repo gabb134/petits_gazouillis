@@ -32,3 +32,13 @@ class FormulaireEditerProfil(FlaskForm):
     nom= StringField('nom', validators=[DataRequired()])
     a_propos_de_moi = TextAreaField('À propos de moi', validators=[Length(min=0,max=140)])
     soumettre = SubmitField('Soumettre')
+
+    def __init__(self,nom_original,*args,**kwargs):
+        super(FormulaireEditerProfil,self).__init__(*args,**kwargs)
+        self.nom_original = nom_original
+
+    def validate_nom(self,nom):
+        if nom.data != self.nom_original:
+            utilisateur = Utilisateur.query.filter_by(nom=self.nom.data).first()
+            if utilisateur is not None:
+                raise ValidationError('Ce nom existe déjà dans la base de données.')
