@@ -42,3 +42,6 @@ class FormulaireEditerProfil(FlaskForm):
             utilisateur = Utilisateur.query.filter_by(nom=self.nom.data).first()
             if utilisateur is not None:
                 raise ValidationError('Ce nom existe déjà dans la base de données.')
+
+class FormulaireVide(FlaskForm):
+    soumettre = SubmitField('Enregistrer')

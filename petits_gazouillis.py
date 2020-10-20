@@ -42,6 +42,7 @@ def initialisation():
     u3=  Utilisateur.query.filter_by(nom='Ron').first_or_404()
     u.devenir_partisan(u2)
     u.devenir_partisan(u3)
+    u2.devenir_partisan(u)
     db.session.commit()
     print("Liste des publications suivies par {} (incluant ses propres publications)".format(u.nom))
     for p in u.Liste_publications_dont_je_suis_partisans():

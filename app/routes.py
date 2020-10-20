@@ -13,7 +13,7 @@ import random
 import base64 
 from io import BytesIO
 from datetime import datetime
-from app.formulaires import FormulaireEditerProfil
+from app.formulaires import FormulaireEditerProfil, FormulaireVide
 
 @app.before_request
 def before_request():
@@ -28,7 +28,7 @@ def before_request():
 @login_required
 def index():   
     utilisateur =current_user
-    publication = current_user.publication.all()
+    publication = current_user.Liste_publications_dont_je_suis_partisans().all()
     #utilisateur = Utilisateur.query.all()
     return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication) 
 
@@ -116,3 +116,44 @@ def editer_profil():
         formulaire.nom.data = current_user.nom
         formulaire.a_propos_de_moi.data = current_user.a_propos_de_moi
     return render_template('editer_profil.html', titre= 'Editer Profil', formulaire=formulaire)
+
+@app.route('/suivre/<nom>',methods=['POST'])
+@login_required
+def suivre(nom):
+    formulaire = FormulaireVide()
+    if formulaire.validate_on_submit():
+        utilisateur = Utilisateur.query.filter_by(nom=nom).first()
+        if utilisateur is None:
+            flash('Utilisateur {} n\'existe pas.'.format(nom))
+            return redirect(url_for('index'))
+        if utilisateur == current_user:
+            flash('Vous ne pouvez pas suivre vous-même!')
+            return redirect(url_for('utilisateur',nom=nom))
+        current_user.devenir_partisans(utilisateur)
+        db.session.commit()
+        flash('Vous suivez maintenant {}!'.format(nom))
+        return redirect(url_for('utilisateur',nom=nom))
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/ne_plus_suivre/<nom>',methods=['POST'])
+@login_required
+def ne_plus_suivre(nom):
+    formulaire = FormulaireVide()
+    if formulaire.validate_on_submit():
+        utilisateur = Utilisateur.query.filter_by(nom=nom).first()
+        if utilisateur is None:
+            flash('Utilisateur {} n\'existe pas.'.format(nom))
+            return redirect(url_for('index'))
+        if utilisateur == current_user:
+            flash('Vous ne pouvez pas ne plus vous suivre, car vous êtes le user courant !')
+            return redirect(url_for('utilisateur',nom=nom))
+        current_user.ne_plus_etre_partisan(utilisateur)
+        db.session.commit()
+        flash('Vous ne suivez plus {}!'.format(nom))
+        return redirect(url_for('utilisateur',nom=nom))
+    else:
+        return redirect(url_for('index'))
+
+

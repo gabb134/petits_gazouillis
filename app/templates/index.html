@@ -4,6 +4,6 @@
         <h1>Bonjour, {{utilisateur.nom}}! </h1>
         <img src="{{utilisateur.avatar}}">
         {% for p in publication %}
-                <div><p>{{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
+                <div><p><img src="{{ p.auteur.avatar }}" width=50 /> {{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
         {% endfor %}
 {% endblock %}
