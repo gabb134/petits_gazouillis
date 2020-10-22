@@ -3,6 +3,7 @@
 {% block content %}
         <h1>Bonjour, {{current_user.nom}}! </h1>
         <img src="{{utilisateur.avatar}}">
+        {% if formulaire %}
         <form action ="" method="post">
                 {{ formulaire.hidden_tag()}}
                 <p>
@@ -15,8 +16,9 @@
                 </p>
                 <p> {{formulaire.soumettre() }}</p>
         </form>
+        {%  endif %}
 
         {% for p in publication %}
-                <div><p><img src="{{ p.auteur.avatar }}" width=50 /> {{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
+                <div><p><a href="{{ url_for('utilisateur', nom=p.auteur.nom) }}"><img src="{{ p.auteur.avatar }}" width=50 /></a> {{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
         {% endfor %}
 {% endblock %}

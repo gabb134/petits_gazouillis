@@ -43,6 +43,13 @@ def index():
     return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication,formulaire=formulaire) 
 
 
+@app.route('/explorer')
+@login_required
+def explorer():
+    publications = Publication.query.order_by(Publication.horodatage.desc()).all()
+    return render_template('index.html',titre='Explorer',publications=publications)
+
+
 @app.route('/utilisateur/<nom>')
 @login_required
 def utilisateur(nom):
