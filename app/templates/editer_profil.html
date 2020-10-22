@@ -15,7 +15,7 @@
             {{ formulaire.a_propos_de_moi.label }}<br>
             {{ formulaire.a_propos_de_moi(cols=50, rows=4) }}<br>
             {% for error in formulaire.a_propos_de_moi.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">[{{ error }}]</span>    
             {% endfor %}
         </p>
         <p>{{ formulaire.soumettre() }}</p>

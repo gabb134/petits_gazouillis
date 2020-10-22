@@ -1,5 +1,4 @@
-2020-09-24 10:40:56,539 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
-2020-09-24 10:41:32,635 ERROR: Exception on /editer_profil [POST] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-09-28 14:52:52,877 ERROR: Exception on /editer_profil [POST] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
     cursor, statement, parameters, context
@@ -70,10 +69,10 @@ Traceback (most recent call last):
     cursor.execute(statement, parameters)
 sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: utilisateur.nom
 [SQL: UPDATE utilisateur SET nom=?, a_propos_de_moi=? WHERE utilisateur.id = ?]
-[parameters: ('Ron', 'Je suis Hermione', 2)]
+[parameters: ('Ron', 'Je suis Hermione!', 2)]
 (Background on this error at: http://sqlalche.me/e/13/gkpj)
-2020-09-24 11:12:20,857 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
-2020-09-24 11:12:33,210 ERROR: Exception on /editer_profil [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-09-28 14:53:16,186 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-09-28 14:53:29,623 ERROR: Exception on /editer_profil [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -94,7 +93,8 @@ Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/wtforms/form.py", line 208, in __call__
     return type.__call__(cls, *args, **kwargs)
 TypeError: __init__() missing 1 required positional argument: 'nom_original'
-2020-09-24 11:12:39,096 ERROR: Exception on /editer_profil [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-09-28 14:55:52,817 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-09-28 14:56:08,680 ERROR: Exception on /editer_profil [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -115,3 +115,5 @@ Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/wtforms/form.py", line 208, in __call__
     return type.__call__(cls, *args, **kwargs)
 TypeError: __init__() missing 1 required positional argument: 'nom_original'
+2020-09-28 14:57:35,400 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-09-28 14:57:51,645 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]

@@ -14,6 +14,8 @@ import base64
 from io import BytesIO
 from datetime import datetime
 from app.formulaires import FormulaireEditerProfil, FormulaireVide
+from app.formulaires import FormulairePublication
+from app.models import Publication
 
 @app.before_request
 def before_request():
@@ -23,14 +25,22 @@ def before_request():
 
  
 
-@app.route('/')
-@app.route('/index')
+@app.route('/',methods=['GET','POST'])
+@app.route('/index',methods=['GET','POST'])
 @login_required
-def index():   
+def index():
+    formulaire = FormulairePublication()
+    if formulaire.validate_on_submit():
+        publication = Publication(corps = formulaire.publication.data, auteur= current_user)
+        db.session.add(publication)
+        db.session.commit()
+        flash('Votre publication est en ligne')
+        return redirect(url_for('index'))   
+             
     utilisateur =current_user
     publication = current_user.Liste_publications_dont_je_suis_partisans().all()
     #utilisateur = Utilisateur.query.all()
-    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication) 
+    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication,formulaire=formulaire) 
 
 
 @app.route('/utilisateur/<nom>')
@@ -38,7 +48,8 @@ def index():
 def utilisateur(nom):
     utilisateur= Utilisateur.query.filter_by(nom=nom).first_or_404()
     publication = utilisateur.publication.all()
-    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication)
+    formulaire = FormulaireVide()
+    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication,formulaire=formulaire)
 
 
 
@@ -129,7 +140,7 @@ def suivre(nom):
         if utilisateur == current_user:
             flash('Vous ne pouvez pas suivre vous-même!')
             return redirect(url_for('utilisateur',nom=nom))
-        current_user.devenir_partisans(utilisateur)
+        current_user.devenir_partisan(utilisateur)
         db.session.commit()
         flash('Vous suivez maintenant {}!'.format(nom))
         return redirect(url_for('utilisateur',nom=nom))

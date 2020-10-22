@@ -45,3 +45,9 @@ class FormulaireEditerProfil(FlaskForm):
 
 class FormulaireVide(FlaskForm):
     soumettre = SubmitField('Enregistrer')
+
+class FormulairePublication(FlaskForm):
+    publication = TextAreaField('Dite quelque chose...', validators=[
+        DataRequired(), Length(min=1, max= 140)])
+    soumettre= SubmitField('Soumettre')
+    
