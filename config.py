@@ -16,3 +16,5 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME') 
     MAIL_PASSWORD= os.environ.get('MAIL_PASSWORD') 
     ADMINS= ['cesarmarrero7@gmail.com']
+
+    PUBLICATIONS_PAR_PAGE = 5

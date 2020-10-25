@@ -1,4 +1,4 @@
-2020-10-19 20:14:42,263 ERROR: Exception on /utilisateur/Hermione [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-10-22 11:46:24,156 ERROR: Exception on /explorer [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,8 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 41, in utilisateur
-    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 50, in explorer
+    return render_template('index.html',titre='Explorer',plublications=publications)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
     ctx.app,
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
@@ -26,17 +26,16 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 1, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 32, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
     {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 25, in block "content"
-    {{ formulaire.hidden_tag() }}
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 5, in block "content"
+    <img src="{{utilisateur.avatar}}">
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
     return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'formulaire' is undefined
-2020-10-19 20:23:46,449 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
-2020-10-19 20:24:02,038 ERROR: Exception on /utilisateur/Hermione [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+jinja2.exceptions.UndefinedError: 'utilisateur' is undefined
+2020-10-22 11:46:29,471 ERROR: Exception on /index [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -52,8 +51,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 41, in utilisateur
-    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 43, in index
+    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication,formulaire=formulaire)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
     ctx.app,
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
@@ -64,16 +63,19 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 1, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 32, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
     {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 25, in block "content"
-    {{ formulaire.hidden_tag() }}
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 22, in block "content"
+    <div><p><a href="{{ url_for('utilisateur', nom=publication.auteur.nom) }}"><img src="{{ p.auteur.avatar }}" width=50 /></a> {{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
     return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'formulaire' is undefined
-2020-10-19 20:24:19,856 ERROR: Exception on /utilisateur/Ron [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'auteur'
+2020-10-22 11:47:22,378 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-10-22 11:47:26,527 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-10-22 11:47:30,345 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+2020-10-22 11:47:38,901 ERROR: Exception on / [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -89,8 +91,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 41, in utilisateur
-    return render_template('utilisateur.html', utilisateur= utilisateur, publication= publication)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 43, in index
+    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication,formulaire=formulaire)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
     ctx.app,
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
@@ -101,13 +103,12 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 1, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 32, in top-level template code
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
     {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/utilisateur.html", line 25, in block "content"
-    {{ formulaire.hidden_tag() }}
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 22, in block "content"
+    <div><p><a href="{{ url_for('utilisateur', nom=publication.auteur.nom) }}"><img src="{{ p.auteur.avatar }}" width=50 /></a> {{ p.auteur.nom}} dits: <b>{{p.corps}}</b></p></div>
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
     return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'formulaire' is undefined
-2020-10-19 20:30:46,009 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'auteur'

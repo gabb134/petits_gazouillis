@@ -38,16 +38,29 @@ def index():
         return redirect(url_for('index'))   
              
     utilisateur =current_user
-    publication = current_user.Liste_publications_dont_je_suis_partisans().all()
+    page = request.args.get('page',1,type=int)
+    publication = current_user.Liste_publications_dont_je_suis_partisans().paginate(page,app.config['PUBLICATIONS_PAR_PAGE'],False)
     #utilisateur = Utilisateur.query.all()
-    return render_template('index.html', titrex='Accueil', utilisateur=utilisateur,publication=publication,formulaire=formulaire) 
+    suivant = url_for('index',page= publication.next_num) \
+        if publication.has_next else None
+    precedent = url_for('index',page = publication.prev_num) \
+        if publication.has_prev else None
+
+    return render_template('index.html', titre='Accueil',suivant=suivant,precedent=precedent, utilisateur=utilisateur,publication=publication.items,formulaire=formulaire) 
 
 
 @app.route('/explorer')
 @login_required
 def explorer():
-    publications = Publication.query.order_by(Publication.horodatage.desc()).all()
-    return render_template('index.html',titre='Explorer',publications=publications)
+    page = request.args.get('page',1,type=int)
+    publication = Publication.query.order_by(Publication.horodatage.desc()).paginate(page,app.config['PUBLICATIONS_PAR_PAGE'],False)
+
+    suivant = url_for('index',page= publication.next_num) \
+        if publication.has_next else None
+    precedent = url_for('index',page = publication.prev_num) \
+        if publication.has_prev else None
+
+    return render_template('index.html',titre='Explorer',suivant=suivant,precedent=precedent, publication=publication.items)
 
 
 @app.route('/utilisateur/<nom>')
