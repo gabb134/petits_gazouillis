@@ -1,35 +1,57 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
 
-<html>
-    <head>
-        {% if titre %}
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{super()}}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
+{% endblock %}
+<!------------------------------------------------------------------------------------>
+{% block scripts %}
+    {{super()}}
+ 
+{% endblock %}
+<!------------------------------------------------------------------------------------>
+{% block title %}
+    {% if titre %}
         <title>{{ titre }} - Petis gazouillis par Gabriel Marrero</title>
         {% else %}
         <title>Bienvenue sur petis gazouillis par Gabriel Marrero!</title>
         {% endif %}
-    </head>
-    <body>
-        <div>Petis Gazouillis par Gabriel Marrero: 
-            <a href="{{ url_for('index') }}">Acceuil</a>
-            {% if current_user.is_anonymous %}
-            <a href="{{ url_for('etablir_session') }}">Établir une session</a>
-            {% else %}
-              <a href="{{ url_for('utilisateur',nom=current_user.nom) }}">Profil</a>
-              <a href="{{ url_for('explorer') }}">Explorer</a>
-              <a href="{{ url_for('logout') }}">Fin de la session</a>
-            {% endif %}
-            
-        </div>
-        <hr>   
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
+{% endblock %}
+<!------------------------------------------------------------------------------------>
+{% block navbar %}
+    <nav class="navbar navbar-default">
+    <div class="container">
+    <div class="navbar-header">
+        
+        <a class="navbar-brand" href="{{ url_for('index') }}">Acceuil</a>
+        {% if current_user.is_anonymous %}
+            <a class="navbar-brand" href="{{ url_for('etablir_session') }}">Établir une session</a>
+        {% else %}
+            <a class="navbar-brand"  href="{{ url_for('utilisateur',nom=current_user.nom) }}">Profil</a>
+            <a class="navbar-brand"  href="{{ url_for('explorer') }}">Explorer</a>
+            <a class="navbar-brand"  href="{{ url_for('logout') }}">Fin de la session</a>
         {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </body>
-</html>
+     
+    </div>
+    </div>
+    </nav>
+{% endblock %}
+<!------------------------------------------------------------------------------------>
+{% block content %}
+<div class="container">
+     Petis gazouillis par Gabriel Marrero
+     {% with messages = get_flashed_messages() %}
+     {% if messages %}
+     <ul>
+         {% for message in messages %}
+         <li>{{ message }}</li>
+         {% endfor %}
+     </ul>
+     {% endif %}
+     {% endwith %}
+     {% block app_content %}{% endblock %}
+</div>
+{% endblock %}
+
+

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
         <h1>Bonjour, {{current_user.nom}}! </h1>
         <img src="{{current_user.avatar}}"/>
         {% if formulaire %}

@@ -5,3 +5,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.websocket
+{
+    font-size: 2em;
+    color: white;
+}
