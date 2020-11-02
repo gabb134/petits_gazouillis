@@ -1,9 +1,11 @@
-from datetime import datetime
+import base64
+from datetime import datetime,timedelta
 from app import db
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import etablir_session
+from flask import url_for
 
 @etablir_session.user_loader
 def load_utilisateur(id):
@@ -13,8 +15,30 @@ partisans = db.Table('partisans',
     db.Column('partisans_id',db.Integer,db.ForeignKey('utilisateur.id')),
     db.Column('utilisateur_qui_est_suivi_id',db.Integer,db.ForeignKey('utilisateur.id'))
 )
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
+        resources = query.paginate(page, per_page, False)
+        data = {
+            'items': [item.to_dict() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            },
+            '_links': {
+                'self': url_for(endpoint, page=page, per_page=per_page,
+                                **kwargs),
+                'suivant': url_for(endpoint, page=page + 1, per_page=per_page,
+                                **kwargs) if resources.has_next else None,
+                'precedent': url_for(endpoint, page=page - 1, per_page=per_page,
+                                **kwargs) if resources.has_prev else None
+            }
+        }
+        return data
 
-class Utilisateur(UserMixin, db.Model):
+class Utilisateur(PaginatedAPIMixin,UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(64), index=True, unique=True)
     courriel = db.Column(db.String(120), index=True, unique=True)
@@ -23,6 +47,9 @@ class Utilisateur(UserMixin, db.Model):
     a_propos_de_moi = db.Column(db.String(140))
 
     dernier_acces = db.Column(db.DateTime, default= datetime.utcnow)
+
+    jeton = db.Column(db.String(32),index=True,unique=True)
+    jeton_expiration = db.Column(db.DateTime)
 
     publication = db.relationship('Publication', backref='auteur', lazy='dynamic')
 
@@ -52,7 +79,22 @@ class Utilisateur(UserMixin, db.Model):
                 partisans.c.partisans_id==self.id)
         mes_publications = Publication.query.filter_by(utilisateur_id = self.id)
         return mes_publications.union(publication_suivies).order_by(Publication.horodatage.desc())
-        
+
+    def to_dict(self):
+        publications = self.Liste_publications_dont_je_suis_partisans()
+        partisans = self.les_partisans
+
+        data = {
+            'id':self.id,
+            'nom':self.nom,
+            'courriel':self.courriel,
+            'avatar': self.avatar,
+            'a_propos_de_moi': self.a_propos_de_moi,
+            'dernier_acces': self.dernier_acces,
+            'publications':[item.id for item in publications], 
+            'partisans': [item.id for item in partisans]
+        }
+        return data
 
     def __repr__(self):
         return '<Utilisateur {}>'.format(self.nom)  
@@ -63,7 +105,27 @@ class Utilisateur(UserMixin, db.Model):
     def valider_mot_de_passe(self, mot_de_passe):
         return check_password_hash(self.mot_de_passe_hash, mot_de_passe)
 
-class Publication(db.Model):
+    def get_jeton(self, expire_dans = 3600):
+        maintenant = datetime.utcnow()
+        if self.jeton and self.jeton_expiration > maintenant + timedelta(seconds=60):
+            return self.jeton
+        self.jeton = base64.b64encode(os.urandom(24)).decode('utf-8')
+        self.jeton_expiration = maintenant + timedelta(seconds=expire_dans)
+        db.session.add(self)
+        return self.jeton
+
+    def revoquer_jeton(self):
+        self.jeton_expiration = datetime.utcnow() - timedelta(seconds=1)
+
+    @staticmethod
+    def verifier_jeton(jeton):
+        utilisateur = Utilisateur.query.filter_by(jeton=jeton).first()
+        if utilisateur is None or utilisateur.jeton_expiration < datetime.utcnow():
+            return None
+        return utilisateur
+
+
+class Publication(PaginatedAPIMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     corps = db.Column(db.String(140))
     horodatage = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -71,6 +133,14 @@ class Publication(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.corps)
+    def to_dict(self):
+        data = {
+            'id':self.id,
+            'corps':self.corps,
+            'horodatage':self.horodatage.isoformat() + 'Z',
+            'utilisateur_id': self.utilisateur_id
+        }
+        return data
 
 
 def get_modele(modele, ligne, racine):

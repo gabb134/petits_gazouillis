@@ -1,4 +1,6 @@
-2020-10-25 15:39:15,329 ERROR: Exception on /explorer [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-10-29 00:13:30,537 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-29 18:21:43,504 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-29 18:22:11,961 ERROR: Exception on /api/utilisateurs [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,31 +14,13 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 50, in explorer
-    return render_template('index.html',titre='Explorer',publication=publications)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
-    ctx.app,
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 5, in block "content"
-    <img src="{{utilisateur.avatar}}"/>
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'utilisateur' is undefined
-2020-10-25 15:39:25,247 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
-2020-10-25 15:40:00,108 ERROR: Exception on /explorer [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/utilisateurs.py", line 23, in get_utilisateurss
+    data = Utilisateur.to_collection_dict(Utilisateur.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 29, in to_collection_dict
+    'self': url_for(endpoint, page=page, per_page=per_page,
+NameError: name 'url_for' is not defined
+2020-10-29 18:24:20,565 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-29 18:24:46,368 ERROR: Exception on /api/utilisateurs [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -50,31 +34,23 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 50, in explorer
-    return render_template('index.html',titre='Explorer',publications=publications)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
-    ctx.app,
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 5, in block "content"
-    <img src="{{utilisateur.avatar}}"/>
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'utilisateur' is undefined
-2020-10-25 15:52:03,806 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:47]
-2020-10-25 15:52:15,230 ERROR: Exception on /explorer [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/utilisateurs.py", line 23, in get_utilisateurss
+    data = Utilisateur.to_collection_dict(Utilisateur.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 31, in to_collection_dict
+    **kwargs),
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'api.get_publications' with values ['page', 'per_page']. Did you mean 'api.get_publication2' instead?
+2020-10-29 18:32:23,565 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-29 18:32:49,436 ERROR: Exception on /api/utilisateurs [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -88,26 +64,27 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/routes.py", line 50, in explorer
-    return render_template('index.html',titre='Explorer',publications=publications)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
-    ctx.app,
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/templates/index.html", line 5, in block "content"
-    <img src="{{utilisateur.avatar}}"/>
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'utilisateur' is undefined
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/utilisateurs.py", line 23, in get_utilisateurss
+    data = Utilisateur.to_collection_dict(Utilisateur.query,page,par_page,'api.get_publications2')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 31, in to_collection_dict
+    **kwargs),
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'api.get_publications2' with values ['page', 'per_page']. Did you mean 'api.get_publication2' instead?
+2020-10-29 18:33:21,704 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-29 18:36:12,953 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-10-31 23:13:52,052 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 12:36:50,768 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 12:52:07,980 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 12:55:40,549 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 19:49:38,577 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 19:49:54,587 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 22:55:46,047 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]

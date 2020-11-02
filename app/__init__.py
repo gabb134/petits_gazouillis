@@ -47,6 +47,10 @@ if not app.debug:
         app.logger.setLevel(logging.INFO)
         app.logger.info('Démarrage de petis Gazouillis')  
 
-from app import routes, models, erreurs
+from app import routes, models
+from app.api import erreurs
 
 bootstrap = Bootstrap(app)
+
+from app.api import bp as api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
