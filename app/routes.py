@@ -16,12 +16,19 @@ from datetime import datetime
 from app.formulaires import FormulaireEditerProfil, FormulaireVide
 from app.formulaires import FormulairePublication
 from app.models import Publication
+from app import socketio
 
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.dernier_acces = datetime.utcnow()
         db.session.commit()
+
+
+@app.route('/websocket')
+def websocket():
+    print("websocket")
+    return render_template('websocket.html')
 
  
 
@@ -34,6 +41,8 @@ def index():
         publication = Publication(corps = formulaire.publication.data, auteur= current_user)
         db.session.add(publication)
         db.session.commit()
+        id = publication.id
+        socketio.emit('nouvelle_publication', {'id':id}, namespace='/chat')
         flash('Votre publication est en ligne')
         return redirect(url_for('index'))   
              
@@ -162,6 +171,7 @@ def suivre(nom):
             return redirect(url_for('utilisateur',nom=nom))
         current_user.devenir_partisan(utilisateur)
         db.session.commit()
+        socketio.emit('actualiser',{'bidon':"vide"}, namespace='/chat')
         flash('Vous suivez maintenant {}!'.format(nom))
         return redirect(url_for('utilisateur',nom=nom))
     else:
@@ -182,6 +192,7 @@ def ne_plus_suivre(nom):
             return redirect(url_for('utilisateur',nom=nom))
         current_user.ne_plus_etre_partisan(utilisateur)
         db.session.commit()
+        socketio.emit('actualiser',{'bidon':"vide"}, namespace='/chat')
         flash('Vous ne suivez plus {}!'.format(nom))
         return redirect(url_for('utilisateur',nom=nom))
     else:

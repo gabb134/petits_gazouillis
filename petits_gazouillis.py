@@ -1,4 +1,4 @@
-from app import app, db, models
+from app import app, db, models,socketio
 from app.models import Utilisateur, Publication
 import os, csv
 
@@ -8,6 +8,9 @@ def make_shell_context():
     return {'db': db, 'U': Utilisateur, 'P': Publication}
 
 print('Demarrage petits gazouillis')    
+
+if __name__ == '__main__':
+    socketio.run(app)
 
 @app.before_first_request
 def initialisation():

@@ -8,6 +8,78 @@
 <!------------------------------------------------------------------------------------>
 {% block scripts %}
     {{super()}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script>
+        var socket;
+        var utilisateurs_tableau = [];
+        var publications_tableau = [];
+
+        function inititliser_websocket(publications_dst)
+        {
+            if((typeof socket == "undefined") || (!socket.connected))
+            {
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/chat')
+            }
+            socket.on('nouvelle_publication', function(data) {
+                alert(data.id);
+
+                infos = btoa("Ron:Password1")
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://127.0.0.1:5000/api/jeton',
+
+                    beforeSend : function (xhr){
+                        xhr.setRequestHeader('Authorization','Basic' + infos);
+                    },
+                    success: function(reponse){
+                        jeton = reponse.jeton;
+                    },
+                    error: function(){
+                        $(element_dst).text("Erreur de chargement.");
+                    },
+
+
+                });
+
+                requete = `http://127.0.0.1:5000//api/publications/${data.id}`;
+                $.ajax({
+                    url: requete,
+                    type: 'GET',
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader('Authorization',`Bearer ${jeton}`);
+                    },
+                    data: { },
+                    success : function(reponse){
+                        alert(reponse.corps);
+                        id = reponse["id"];
+                        if(typeof publications_tableau[id] === 'undefined')
+                        {
+                            corps = reponse["corps"];
+                            id_utilisateur = reponse["id_utilisateur"];
+                            
+                            auteur = utilisateurs_tableau[id_utilisateur].nom
+                            avatar =  utilisateurs_tableau[id_utilisateur].avatar
+                            horodatage = reponse["horodatage"];
+                            publication_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id}><img src="${avatar}" width=100px/></td><td id=auteur${id}>${auteur}</td><td id=horodatage${id}>${horodatage}</td><td id=corps${id}>${corps}</td></tr>`;
+                            $(publications_dst).append(publication_format)
+
+                    
+                        }
+                    },
+                    error: function(){
+                        $(element_dst).text("Erreur de chagement.");
+                    },
+                });
+
+            });
+            socket.on('actualiser', function(data){
+                alert(data.bidon);
+                afficher_publications("#utilisateurs","#publications",1,9999)
+            });
+        };
+
+            
+    </script> 
  
 {% endblock %}
 <!------------------------------------------------------------------------------------>
@@ -39,7 +111,7 @@
     </nav>
 {% endblock %}
 <!------------------------------------------------------------------------------------>
-{% block content %}
+{% block content %}l
 <div class="container">
      Petis gazouillis par Gabriel Marrero
      {% with messages = get_flashed_messages() %}

@@ -8,8 +8,12 @@ from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
 import os 
 from flask_bootstrap import Bootstrap
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+
+socketio = SocketIO(app)
+
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
