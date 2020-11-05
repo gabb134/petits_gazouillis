@@ -10,6 +10,7 @@
     {{super()}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <script>
+            //alert("au debut!")
         var socket;
         var utilisateurs_tableau = [];
         var publications_tableau = [];
@@ -74,9 +75,111 @@
             });
             socket.on('actualiser', function(data){
                 alert(data.bidon);
-                afficher_publications("#utilisateurs","#publications",1,9999)
+                alert("ici!")
+                afficher_publications('#utilisateurs','#publications',1,999999)
             });
         };
+
+        function afficher_publications(utilisateur_dst,publications_dst,page,par_page)
+        {
+            utilisateurs_json = { "par_reference":"vide" }
+            publications_json = { "par_reference":"vide" }
+
+            alert("afficher_publications début")
+            $(utilisateur_dst).empty();
+            $(publications_dst).empty();
+            jQuery.ajaxSetup({async:false});
+            charger('http://127.0.0.1:5000/api/publications',publications_json,page,par_page)
+            charger('http://127.0.0.1:5000/api/utilisateurs',utilisateurs_json,page,par_page)
+
+            jQuery.ajaxSetup({async:true});
+            alert("afficher_publications fin")
+
+            u = utilisateurs_json.par_reference;
+            u.items.forEach(element=>{
+                id = element["id"];
+                nom = element["nom"];
+                avatar = element["avatar"];
+                courriel = element["courriel"];
+                a_propos_de_moi = element["a_propos_de_moi"];
+
+                partisans = element["partisans"];
+                publications = element["publications"];
+                utilisateurs_tableau[id] = {id,nom,avatar,courriel,a_propos_de_moi,partisans,publications};
+
+            })
+
+            utilisateurs_tableau.forEach(element=>{
+                id = element["id"];
+                nom = element["nom"];
+                avatar = element["avatar"];
+                partisans = element["partisans"];
+                avatars_partisans = ""
+                partisans.forEach(id_partisans=>{
+                    avatars_partisan = utilisateurs_tableau[id_partisans].avatar
+                    avatars_partisans = `<img src="${avatars_partisan}" width=50px/>${avatars_partisans}`
+                });
+                utilisateur_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id} ><img src="${avatar}" width=100px/></td><td id=nom${id}>${nom}<td>Est partisan de ${avatars_partisans}</td></td></tr>`;
+                $(utilisateur_dst).append(utilisateur_format)
+
+            });
+//minute 27:14
+            p= publications_json.par_reference;
+            p.items.reverse().forEach(element=>{
+                corps = element["corps"];
+                id_utilisateur = element["utilisateur_id"];
+                id = element["id"];
+                auteur = utilisateurs_tableau[id_utilisateur].nom
+                avatar = utilisateurs_tableau[id_utilisateur].avatar
+                horodatage = element["horodatage"];
+
+                publications_tableau[id] = {id,id_utilisateur,corps,horodatage};
+
+                publication_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id}><img src="${avatar}" width=100px/></td><td id=auteur${id}>${auteur}</td><td id=horodatage${id}>${horodatage}</td><td id=corps${id}>${corps}</td></tr>`;
+
+                $(publications_dst).append(publication_format)
+
+                //$("#auteur".id).css("color","red");
+            });
+
+            inititliser_websocket(publications_dst);
+
+        }
+        var jeton
+        function charger(requete, destination, page, par_page)
+        {
+            infos = btoa("Ron:Password1")
+            $.ajax({
+                type: 'GET',
+                url: "http://127.0.0.1:5000/api/jeton",
+
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization','Basic '+infos);
+                },
+                success: function(reponse){
+                    jeton = reponse.jeton;
+                },
+                error: function(){
+                    $(element_dst).text("Erreur de chargement.");
+                },
+            }); //partie d'en haut sert a apbtenir le jeton
+
+            alert("Jeton obtenu: "+ jeton)
+            $.ajax({
+                url: requete,
+                type: 'GET',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization',`Bearer ${jeton}` );
+                },
+                data:{page:page,par_page:par_page},
+                success: function(reponse){
+                    destination.par_reference = reponse;
+                },
+                error: function(){
+                    $(element_dst).text("Erreur de chargement.");
+                },
+            });
+        }
 
             
     </script> 

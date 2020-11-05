@@ -71,3 +71,12 @@ Traceback (most recent call last):
     'items': [item.to_dict() for item in resources.items],
 AttributeError: 'Publication' object has no attribute 'to_dict'
 2020-11-02 15:06:05,346 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-05 17:51:43,235 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 17:57:51,801 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:01:03,290 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:02:57,743 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:03:39,091 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:05:49,417 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:09:19,163 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:10:15,496 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-05 18:11:13,753 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
