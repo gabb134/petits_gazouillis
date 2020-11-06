@@ -22,7 +22,7 @@
                 socket = io.connect('http://' + document.domain + ':' + location.port + '/chat')
             }
             socket.on('nouvelle_publication', function(data) {
-                alert(data.id);
+              //  alert("id de la nouvelle publication: "+data.id);
 
                 infos = btoa("Ron:Password1")
                 $.ajax({
@@ -61,8 +61,10 @@
                             auteur = utilisateurs_tableau[id_utilisateur].nom
                             avatar =  utilisateurs_tableau[id_utilisateur].avatar
                             horodatage = reponse["horodatage"];
+                            publications_tableau[id] = {id,id_utilisateur,corps,horodatage};
+
                             publication_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id}><img src="${avatar}" width=100px/></td><td id=auteur${id}>${auteur}</td><td id=horodatage${id}>${horodatage}</td><td id=corps${id}>${corps}</td></tr>`;
-                            $(publications_dst).append(publication_format)
+                            $(publications_dst).prepend(publication_format)
 
                     
                         }
@@ -74,8 +76,8 @@
 
             });
             socket.on('actualiser', function(data){
-                alert(data.bidon);
-                alert("ici!")
+             //   alert(data.bidon);
+               // alert("ici!")
                 afficher_publications('#utilisateurs','#publications',1,999999)
             });
         };
@@ -85,7 +87,7 @@
             utilisateurs_json = { "par_reference":"vide" }
             publications_json = { "par_reference":"vide" }
 
-            alert("afficher_publications début")
+            //alert("afficher_publications début")
             $(utilisateur_dst).empty();
             $(publications_dst).empty();
             jQuery.ajaxSetup({async:false});
@@ -93,7 +95,7 @@
             charger('http://127.0.0.1:5000/api/utilisateurs',utilisateurs_json,page,par_page)
 
             jQuery.ajaxSetup({async:true});
-            alert("afficher_publications fin")
+          //  alert("afficher_publications fin")
 
             u = utilisateurs_json.par_reference;
             u.items.forEach(element=>{

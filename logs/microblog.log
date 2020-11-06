@@ -80,3 +80,6 @@ AttributeError: 'Publication' object has no attribute 'to_dict'
 2020-11-05 18:09:19,163 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
 2020-11-05 18:10:15,496 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
 2020-11-05 18:11:13,753 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-06 00:38:01,262 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-06 00:58:28,064 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
+2020-11-06 01:02:09,147 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:52]
