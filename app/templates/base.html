@@ -7,7 +7,7 @@
 {% endblock %}
 <!------------------------------------------------------------------------------------>
 {% block scripts %}
-    {{super()}}
+    {{ super() }}
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <script>
             //alert("au debut!")
@@ -17,12 +17,12 @@
 
         function inititliser_websocket(publications_dst)
         {
-            if((typeof socket == "undefined") || (!socket.connected))
+            if((typeof socket === "undefined") || (!socket.connected))
             {
                 socket = io.connect('http://' + document.domain + ':' + location.port + '/chat')
             }
             socket.on('nouvelle_publication', function(data) {
-              //  alert("id de la nouvelle publication: "+data.id);
+                alert("id de la nouvelle publication: "+data.id);
 
                 infos = btoa("Ron:Password1")
                 $.ajax({
@@ -30,7 +30,7 @@
                     url: 'http://127.0.0.1:5000/api/jeton',
 
                     beforeSend : function (xhr){
-                        xhr.setRequestHeader('Authorization','Basic' + infos);
+                        xhr.setRequestHeader('Authorization','Basic ' + infos);
                     },
                     success: function(reponse){
                         jeton = reponse.jeton;
@@ -51,7 +51,7 @@
                     },
                     data: { },
                     success : function(reponse){
-                        alert(reponse.corps);
+                        alert("Reponse : "+reponse.corps);
                         id = reponse["id"];
                         if(typeof publications_tableau[id] === 'undefined')
                         {
@@ -66,7 +66,7 @@
                             publication_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id}><img src="${avatar}" width=100px/></td><td id=auteur${id}>${auteur}</td><td id=horodatage${id}>${horodatage}</td><td id=corps${id}>${corps}</td></tr>`;
                             $(publications_dst).prepend(publication_format)
 
-                    
+                            alert("dans le success")
                         }
                     },
                     error: function(){
@@ -76,9 +76,9 @@
 
             });
             socket.on('actualiser', function(data){
-             //   alert(data.bidon);
+                alert("dans actualiser: "+data.bidon);
                // alert("ici!")
-                afficher_publications('#utilisateurs','#publications',1,999999)
+                afficher_publications('#utilisateurs','#publications',1,9999)
             });
         };
 
@@ -87,15 +87,15 @@
             utilisateurs_json = { "par_reference":"vide" }
             publications_json = { "par_reference":"vide" }
 
-            //alert("afficher_publications début")
+            alert("afficher_publications début")
             $(utilisateur_dst).empty();
             $(publications_dst).empty();
             jQuery.ajaxSetup({async:false});
             charger('http://127.0.0.1:5000/api/publications',publications_json,page,par_page)
             charger('http://127.0.0.1:5000/api/utilisateurs',utilisateurs_json,page,par_page)
 
-            jQuery.ajaxSetup({async:true});
-          //  alert("afficher_publications fin")
+            jQuery.ajaxSetup({async:false});
+            alert("afficher_publications fin")
 
             u = utilisateurs_json.par_reference;
             u.items.forEach(element=>{
@@ -165,13 +165,13 @@
                     $(element_dst).text("Erreur de chargement.");
                 },
             }); //partie d'en haut sert a apbtenir le jeton
-
+            infos = btoa("Ron:Password1")
             alert("Jeton obtenu: "+ jeton)
             $.ajax({
                 url: requete,
                 type: 'GET',
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader('Authorization',`Bearer ${jeton}` );
+                    xhr.setRequestHeader('Authorization',`Bearer ${jeton}`);
                 },
                 data:{page:page,par_page:par_page},
                 success: function(reponse){
@@ -216,7 +216,7 @@
     </nav>
 {% endblock %}
 <!------------------------------------------------------------------------------------>
-{% block content %}l
+{% block content %}
 <div class="container">
      Petis gazouillis par Gabriel Marrero
      {% with messages = get_flashed_messages() %}
