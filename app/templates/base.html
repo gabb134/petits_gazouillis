@@ -5,7 +5,7 @@
     {{super()}}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css')}}">
 {% endblock %}
-<!------------------------------------------------------------------------------------>
+
 {% block scripts %}
     {{ super() }}
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
@@ -27,13 +27,15 @@
                 infos = btoa("Ron:Password1")
                 $.ajax({
                     type: 'GET',
-                    url: 'http://127.0.0.1:5000/api/jeton',
+                    url: "http://127.0.0.1:5000/api/jeton",
 
                     beforeSend : function (xhr){
                         xhr.setRequestHeader('Authorization','Basic ' + infos);
                     },
                     success: function(reponse){
                         jeton = reponse.jeton;
+
+                        alert("succes dans jeton")
                     },
                     error: function(){
                         $(element_dst).text("Erreur de chargement.");
@@ -42,21 +44,23 @@
 
                 });
 
-                requete = `http://127.0.0.1:5000//api/publications/${data.id}`;
+                requete = `http://127.0.0.1:5000/api/publications/${data.id}`;
                 $.ajax({
                     url: requete,
                     type: 'GET',
                     beforeSend: function(xhr){
                         xhr.setRequestHeader('Authorization',`Bearer ${jeton}`);
+                        alert("dans beforesend apres requete")
                     },
                     data: { },
                     success : function(reponse){
                         alert("Reponse : "+reponse.corps);
                         id = reponse["id"];
-                        if(typeof publications_tableau[id] === 'undefined')
+                        //alert("id obtenu de reponse[id] :"+id)
+                        if(typeof publications_tableau[id] === 'undefined') //il ne rentre pas dans ce if, j'ai aucune idee
                         {
                             corps = reponse["corps"];
-                            id_utilisateur = reponse["id_utilisateur"];
+                            id_utilisateur = reponse["utilisateur_id"];
                             
                             auteur = utilisateurs_tableau[id_utilisateur].nom
                             avatar =  utilisateurs_tableau[id_utilisateur].avatar
@@ -84,8 +88,8 @@
 
         function afficher_publications(utilisateur_dst,publications_dst,page,par_page)
         {
-            utilisateurs_json = { "par_reference":"vide" }
-            publications_json = { "par_reference":"vide" }
+            utilisateurs_json = { "par_reference":"vide" };
+            publications_json = { "par_reference":"vide" };
 
             alert("afficher_publications début")
             $(utilisateur_dst).empty();
@@ -135,7 +139,9 @@
                 avatar = utilisateurs_tableau[id_utilisateur].avatar
                 horodatage = element["horodatage"];
 
-                publications_tableau[id] = {id,id_utilisateur,corps,horodatage};
+                publications_tableau["id"] = {id,id_utilisateur,corps,horodatage};
+
+              //  alert("horodatage: "+ horodatage)
 
                 publication_format = `<tr id=tr{id}><td id=id{id}>${id}</td><td id=avatar${id}><img src="${avatar}" width=100px/></td><td id=auteur${id}>${auteur}</td><td id=horodatage${id}>${horodatage}</td><td id=corps${id}>${corps}</td></tr>`;
 
@@ -156,7 +162,7 @@
                 url: "http://127.0.0.1:5000/api/jeton",
 
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader('Authorization','Basic '+infos);
+                    xhr.setRequestHeader('Authorization','Basic ' +infos);
                 },
                 success: function(reponse){
                     jeton = reponse.jeton;
@@ -181,13 +187,13 @@
                     $(element_dst).text("Erreur de chargement.");
                 },
             });
-        }
+        };
 
             
     </script> 
  
 {% endblock %}
-<!------------------------------------------------------------------------------------>
+
 {% block title %}
     {% if titre %}
         <title>{{ titre }} - Petis gazouillis par Gabriel Marrero</title>
@@ -195,7 +201,7 @@
         <title>Bienvenue sur petis gazouillis par Gabriel Marrero!</title>
         {% endif %}
 {% endblock %}
-<!------------------------------------------------------------------------------------>
+
 {% block navbar %}
     <nav class="navbar navbar-default">
     <div class="container">
@@ -215,7 +221,7 @@
     </div>
     </nav>
 {% endblock %}
-<!------------------------------------------------------------------------------------>
+
 {% block content %}
 <div class="container">
      Petis gazouillis par Gabriel Marrero

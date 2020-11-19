@@ -1,4 +1,4 @@
-2020-11-01 22:56:26,854 ERROR: Exception on /api/jeton [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+2020-11-01 23:19:43,171 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,97 +14,104 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
     return f(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/jeton.py", line 15, in get_jeton
-    jeton = basic_auth.current_user().get_jeton()
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 111, in get_jeton
-    self.jeton = base64.b64encode(os.urandom(24).decode('utf-8'))
-NameError: name 'base64' is not defined
-2020-11-01 22:58:21,062 ERROR: Exception on /api/jeton [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
-Traceback (most recent call last):
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
-    return f(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/jeton.py", line 15, in get_jeton
-    jeton = basic_auth.current_user().get_jeton()
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 111, in get_jeton
-    self.jeton = base64.b64encode(os.urandom(24).decode('utf-8'))
-NameError: name 'base64' is not defined
-2020-11-01 23:02:46,962 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
-2020-11-01 23:03:02,582 ERROR: Exception on /api/jeton [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
-Traceback (most recent call last):
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
-    return f(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/jeton.py", line 15, in get_jeton
-    jeton = basic_auth.current_user().get_jeton()
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 112, in get_jeton
-    self.jeton = base64.b64encode(os.urandom(24).decode('utf-8'))
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0x99 in position 4: invalid start byte
-2020-11-01 23:03:50,939 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
-2020-11-01 23:04:10,092 ERROR: Exception on /api/jeton [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
-Traceback (most recent call last):
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
-    return f(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/jeton.py", line 17, in get_jeton
-    return jsonify({'jeton': jeton})
-NameError: name 'jsonify' is not defined
-2020-11-01 23:05:22,426 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
-2020-11-01 23:08:10,124 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
-2020-11-01 23:17:31,016 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
-Traceback (most recent call last):
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
-    return f(*args, **kwargs)
-  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 24, in get_publications
-    page = request.args.get('page',1,type=int)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 26, in get_publications
+    data = Utilisateur.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
   File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in to_collection_dict
     'items': [item.to_dict() for item in resources.items],
   File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in <listcomp>
     'items': [item.to_dict() for item in resources.items],
 AttributeError: 'Publication' object has no attribute 'to_dict'
-2020-11-01 23:19:01,835 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 23:54:44,484 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+Traceback (most recent call last):
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
+    return f(*args, **kwargs)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 26, in get_publications
+    data = Utilisateur.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in to_collection_dict
+    'items': [item.to_dict() for item in resources.items],
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in <listcomp>
+    'items': [item.to_dict() for item in resources.items],
+AttributeError: 'Publication' object has no attribute 'to_dict'
+2020-11-01 23:55:23,749 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 23:55:52,012 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+Traceback (most recent call last):
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
+    return f(*args, **kwargs)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 26, in get_publications
+    data = Publication.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in to_collection_dict
+    'items': [item.to_dict() for item in resources.items],
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in <listcomp>
+    'items': [item.to_dict() for item in resources.items],
+AttributeError: 'Publication' object has no attribute 'to_dict'
+2020-11-01 23:57:29,371 INFO: Démarrage de petis Gazouillis [in /home/etudiant/projetsPython/petits_gazouillis/app/__init__.py:48]
+2020-11-01 23:58:06,459 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+Traceback (most recent call last):
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
+    return f(*args, **kwargs)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 26, in get_publications
+    data = Publication.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in to_collection_dict
+    'items': [item.to_dict() for item in resources.items],
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in <listcomp>
+    'items': [item.to_dict() for item in resources.items],
+AttributeError: 'Publication' object has no attribute 'to_dict'
+2020-11-01 23:59:57,840 ERROR: Exception on /api/publications [GET] [in /home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py:1892]
+Traceback (most recent call last):
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/etudiant/projetsPython/petits_gazouillis/venv/lib/python3.7/site-packages/flask_httpauth.py", line 163, in decorated
+    return f(*args, **kwargs)
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/api/publications.py", line 26, in get_publications
+    data = Publication.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in to_collection_dict
+    'items': [item.to_dict() for item in resources.items],
+  File "/home/etudiant/projetsPython/petits_gazouillis/app/models.py", line 23, in <listcomp>
+    'items': [item.to_dict() for item in resources.items],
+AttributeError: 'Publication' object has no attribute 'to_dict'
