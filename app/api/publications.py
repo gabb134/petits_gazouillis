@@ -4,8 +4,10 @@ from flask import jsonify
 from flask import request
 from app.api.auth import basic_auth
 from app.api.auth import token_auth 
+from flask_cors import cross_origin
 
 @bp.route('/publications/<int:id>',methods=['GET'])
+@token_auth.login_required
 def get_publication2(id):
     return jsonify(Publication.query.get_or_404(id).to_dict())
 
@@ -19,6 +21,7 @@ def get_publication(id):
 
 #Lire toutes les publications
 @bp.route('/publications',methods=['GET'])
+@cross_origin()
 @token_auth.login_required
 def get_publications():
     page = request.args.get('page',1,type=int)

@@ -12,6 +12,8 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 
+CORS(app)
+
 socketio = SocketIO(app)
 
 app.config.from_object(Config)

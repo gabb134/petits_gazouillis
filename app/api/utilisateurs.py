@@ -2,6 +2,10 @@ from app.api import bp
 from app.models import Utilisateur
 from flask import jsonify
 from flask import request 
+from flask_cors import cross_origin
+from app.api.auth import basic_auth
+from app.api.auth import token_auth 
+
 
 @bp.route('/utilisateurs2',methods=['GET'])
 def get_utilisateurs2():
@@ -17,6 +21,8 @@ def get_utilisateur(id):
 
 #Lire toutes les publications
 @bp.route('/utilisateurs',methods=['GET'])
+@cross_origin()
+@token_auth.login_required
 def get_utilisateurss():
     page = request.args.get('page',1,type=int)
     par_page = min(request.args.get('par_page',10,type=int),100)
