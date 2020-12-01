@@ -9,6 +9,7 @@ from logging.handlers import RotatingFileHandler
 import os 
 from flask_bootstrap import Bootstrap
 from flask_socketio import SocketIO
+from flask_cors import CORS
 
 app = Flask(__name__)
 
