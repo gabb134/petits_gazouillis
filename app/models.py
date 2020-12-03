@@ -127,10 +127,12 @@ class Utilisateur(PaginatedAPIMixin,UserMixin, db.Model):
         if self.jeton and self.jeton_expiration > maintenant + timedelta(seconds=60):
             return self.jeton
         self.jeton = base64.b64encode(os.urandom(24)).decode('utf-8')
+        
         self.jeton_expiration = maintenant + timedelta(seconds=expire_dans)
         filtre = [';',':','!',"*","/"]
-        for c in filtre:
+        for c in filtre :
             self.jeton = self.jeton.replace(c,'X')
+            
         db.session.add(self)
         return self.jeton
 
