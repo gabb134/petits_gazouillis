@@ -26,7 +26,7 @@ def get_publication(id):
 def get_publications():
     page = request.args.get('page',1,type=int)
     par_page = min(request.args.get('par_page',10,type=int),100)
-    data = Publication.to_collection_dict(Publication.query,page,par_page,'api.get_publications')
+    data = Publication.to_collection_dict(Publication.query,page,par_page,'api.get_publications',"publications")
 
     return jsonify(data)
 
